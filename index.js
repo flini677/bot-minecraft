@@ -28,14 +28,13 @@ function crearBot() {
 }
 
 crearBot();
-const express = require('express');
-const app = express();
+
+const http = require('http');
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.send('Bot AFK 24/7 Activo');
-});
-
-app.listen(port, () => {
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Bot AFK 24/7 Activo');
+}).listen(port, () => {
   console.log(`Servidor web escuchando en el puerto ${port}`);
 });
