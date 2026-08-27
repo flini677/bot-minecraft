@@ -1,7 +1,6 @@
 const mineflayer = require('mineflayer');
 const serverHttp = require('http');
 
-// Servidor web de mantenimiento para Render y UptimeRobot
 const port = process.env.PORT || 3000;
 
 serverHttp.createServer((req, res) => {
@@ -11,15 +10,13 @@ serverHttp.createServer((req, res) => {
   console.log(`Servidor web escuchando en el puerto ${port}`);
 });
 
-// Configuración del bot de Minecraft
 function crearBot() {
   console.log('Intentando conectar bot a Aternos...');
   
   const bot = mineflayer.createBot({
     host: 'matiasmilos.aternos.me',
     port: 40630,
-    username: 'BotAFK',
-    version: '1.20.4'
+    username: 'BotAFK'
   });
 
   bot.on('spawn', () => {
@@ -38,4 +35,3 @@ function crearBot() {
 }
 
 crearBot();
- 
