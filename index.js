@@ -14,10 +14,11 @@ function crearBot() {
   console.log('Intentando conectar bot a Aternos...');
   
   const bot = mineflayer.createBot({
-    host: 'caterpillar.aternos.host',
+    host: '185.107.193.177', // Reemplaza esto con los números de la IP (ej: '185.107.193.172')
     port: 40630,
     username: 'BotAFK',
-    checkTimeoutInterval: 30000
+    version: '1.20.4',
+    hideErrors: false
   });
 
   bot.on('spawn', () => {
