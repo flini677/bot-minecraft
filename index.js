@@ -1,7 +1,6 @@
 const mineflayer = require('mineflayer');
 const http = require('http');
 
-// Configuración del servidor web
 const port = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
@@ -9,12 +8,11 @@ const server = http.createServer((req, res) => {
   res.end('Bot AFK 24/7 Activo');
 });
 
-// Función para conectar el bot
 function conectarBot() {
   console.log('Intentando conectar bot a Aternos...');
   
   const bot = mineflayer.createBot({
-    host: 'matiasmilos.aternos.me',
+    host: 'caterpillar.aternos.host', // IP dinámica directa para evitar el bloqueo de Render
     port: 40630,
     username: 'BotAFK'
   });
@@ -34,7 +32,6 @@ function conectarBot() {
   });
 }
 
-// Iniciar servidor web y conectar bot inmediatamente
 server.listen(port, () => {
   console.log(`Servidor web escuchando en el puerto ${port}`);
   conectarBot();
