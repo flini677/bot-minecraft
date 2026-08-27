@@ -1,24 +1,22 @@
 const mineflayer = require('mineflayer');
-const serverHttp = require('http');
+const http = require('http');
 
+// Configuración del servidor web
 const port = process.env.PORT || 3000;
 
-serverHttp.createServer((req, res) => {
+const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end('Bot AFK 24/7 Activo');
-}).listen(port, () => {
-  console.log(`Servidor web escuchando en el puerto ${port}`);
 });
 
-function crearBot() {
+// Función para conectar el bot
+function conectarBot() {
   console.log('Intentando conectar bot a Aternos...');
   
   const bot = mineflayer.createBot({
-    host: '185.107.193.177', // Reemplaza esto con los números de la IP (ej: '185.107.193.172')
+    host: 'matiasmilos.aternos.me',
     port: 40630,
-    username: 'BotAFK',
-    version: '1.20.4',
-    hideErrors: false
+    username: 'BotAFK'
   });
 
   bot.on('spawn', () => {
@@ -30,10 +28,14 @@ function crearBot() {
   });
 
   bot.on('error', err => console.log('Error del bot:', err.message));
-  bot.on('end', (reason) => {
-    console.log('Bot desconectado. Razón:', reason);
-    setTimeout(crearBot, 5000);
+  bot.on('end', () => {
+    console.log('Bot desconectado. Reintentando en 5s...');
+    setTimeout(conectarBot, 5000);
   });
 }
 
-crearBot();
+// Iniciar servidor web y conectar bot inmediatamente
+server.listen(port, () => {
+  console.log(`Servidor web escuchando en el puerto ${port}`);
+  conectarBot();
+});
